@@ -1,0 +1,11 @@
+{
+  "name": "shared_clipboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ilya Siganov <ilya.blan4@gmail.com>",
+  "license": "MIT"
+}
