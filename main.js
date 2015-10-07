@@ -23,7 +23,7 @@ function startServer() {
     });
   });
 
-  srv.listen(8124, () => {
+  srv.listen(8124, '0.0.0.0', () => {
     console.log('Start listening ' + JSON.stringify(srv.address()));
   });
 
@@ -32,8 +32,9 @@ function startServer() {
   };
 }
 
-function connectToServer() {
-  const client = net.connect({port: 8124}, () => {
+function connectToServer(path) {
+  path = path || '0.0.0.0';
+  const client = net.connect({path: path, port: 8124}, () => {
     console.log('Connected to server');
   });
 
@@ -57,4 +58,26 @@ function readClip() {
 
 function putInClip(text) {
   return clipboard.writeText(text);
+}
+
+function listenChanges(callback) {
+  let currentData = readClip();
+  const intervalId = setInterval(() => {
+    const data = readClip();
+    if (data !== currentData) {
+      currentData = data;
+      console.log('Clipboard changed');
+      callback(data);
+    }
+  }, 500);
+}
+
+function initClipboardServer() {
+  const send = startServer();
+  listenChanges(data => send(data));
+}
+
+function initClipboardClient(address) {
+  const send = connectToServer(address);
+  listenChanges(data => send(data));
 }
