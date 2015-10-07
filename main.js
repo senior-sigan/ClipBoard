@@ -1,18 +1,60 @@
 'use strict';
 
-const http = require('http');
+const net = require('net');
 const clipboard = require('clipboard');
-
+const uuid = require('node-uuid');
+const _ = require('lodash');
 
 function startServer() {
-  const srv = http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end(readClip());
+  const clients = {};
+  const srv = net.createServer(client => {
+    console.log('Client connected');
+    let clientId = uuid.v4();
+    clients[clientId] = client;
+
+    client.on('end', () => {
+      console.log('Client disconnected');
+      delete clients[clientId];
+    });
+
+    client.on('data', data => {
+      console.log(data);
+      putInClip(data.toString());
+    });
   });
 
-  srv.listen(1337);
+  srv.listen(8124, () => {
+    console.log('Start listening ' + JSON.stringify(srv.address()));
+  });
+
+  return (data) => {
+    _.forOwn(clients, client => client.write(data));
+  };
+}
+
+function connectToServer() {
+  const client = net.connect({port: 8124}, () => {
+    console.log('Connected to server');
+  });
+
+  client.on('data', (data) => {
+    console.log(data);
+    putInClip(data.toString());
+  });
+
+  client.on('end', () => {
+    console.log('Disconnected from server');
+  });
+
+  return (data) => {
+    client.write(data);
+  };
 }
 
 function readClip() {
   return clipboard.readText();
+}
+
+function putInClip(text) {
+  return clipboard.writeText(text);
 }
