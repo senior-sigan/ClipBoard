@@ -18,7 +18,7 @@ function startServer() {
     });
 
     client.on('data', data => {
-      console.log(data);
+      console.log(data.toString());
       putInClip(data.toString());
     });
   });
@@ -34,7 +34,7 @@ function startServer() {
 
 function connectToServer(path) {
   path = path || '0.0.0.0';
-  const client = net.connect({path: path, port: 8124}, () => {
+  const client = net.connect({host: path, port: 8124}, () => {
     console.log('Connected to server');
   });
 
