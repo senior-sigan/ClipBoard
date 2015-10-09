@@ -1,3 +1,5 @@
+'use strict';
+
 const app = require('app');  // Module to control application life.
 const BrowserWindow = require('browser-window');  // Module to create native browser window.
 const ipc = require('ipc');
