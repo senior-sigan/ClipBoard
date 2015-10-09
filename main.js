@@ -39,7 +39,7 @@ function connectToServer(path) {
   });
 
   client.on('data', (data) => {
-    console.log(data);
+    console.log(data.toString());
     putInClip(data.toString());
   });
 
