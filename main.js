@@ -32,6 +32,52 @@ function startServer() {
   };
 }
 
+function startWebSocketServer() {
+  const clients = {};
+  const app = require('http').createServer((req, res) => {
+    res.send('Hello from clipboard server');
+  });
+  const io = require('socket.io')(app);
+  io.on('connection', client => {
+    let clientId = uuid.v4();
+    console.log(`Client ${clientId} connected`);
+    clients[clientId] = client;
+
+    client.on('message', data => {
+      console.log(data);
+      putInClip(data);
+    });
+
+    client.on('disconnect', () => {
+      console.log(`Client ${clientId} disconnected`);
+      delete clients[clientId];
+    });
+  });
+
+  app.listen(8124);
+
+  return (data) => {
+    _.forOwn(clients, client => client.emit(data));
+  }
+}
+
+function connectToWebSocketServer(path) {
+  path = path || 'http://localhost:8124';
+  const io = require('socket.io-client');
+  const client = io(path);
+
+  client.on('connect', () => console.log(`Connected to Clipboard server ${path}`));
+  client.on('disconnect', () => console.log(`Disconnected from Clipboard server ${path}`));
+  client.on('message', data => {
+    console.log(data);
+    putInClip(data);
+  });
+
+  return (data) => {
+    client.send(data);
+  };
+}
+
 function connectToServer(path) {
   path = path || '0.0.0.0';
   const client = net.connect({host: path, port: 8124}, () => {
@@ -73,11 +119,11 @@ function listenChanges(callback) {
 }
 
 function initClipboardServer() {
-  const send = startServer();
+  const send = startWebSocketServer();
   listenChanges(data => send(data));
 }
 
-function initClipboardClient(address) {
-  const send = connectToServer(address);
+function initClipboardClient(path) {
+  const send = connectToWebSocketServer(path);
   listenChanges(data => send(data));
 }

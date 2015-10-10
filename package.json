@@ -9,7 +9,13 @@
   "author": "Ilya Siganov <ilya.blan4@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "browserify": "^11.2.0",
     "lodash": "^3.10.1",
-    "node-uuid": "^1.4.3"
+    "material-design-lite": "^1.0.5",
+    "node-uuid": "^1.4.3",
+    "reactify": "^1.1.1",
+    "socket.io": "^1.3.7",
+    "socket.io-client": "^1.3.7",
+    "watchify": "^3.4.0"
   }
 }

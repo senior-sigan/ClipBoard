@@ -2,11 +2,33 @@
 <html>
   <head>
     <title>Hello World!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="node_modules/material-design-lite/material.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using io.js <script>document.write(process.version)</script>
-    and Electron <script>document.write(process.versions['electron'])</script>.
+    <h1>Clipboard</h1>
+    <div id="container">
+      <section>
+        <button class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
+          Serve
+        </button>
+      </section>
+
+      <section>
+        <form action="#">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="address" />
+            <label class="mdl-textfield__label" for="address">Address...</label>
+          </div>
+
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Connect
+          </button>
+        </form>
+      <section>
+    </div>
   </body>
 </html>
