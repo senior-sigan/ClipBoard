@@ -3,7 +3,8 @@
 const Clipboard = require('./Clipboard');
 
 function connectToWebSocketServer(path, callback, disconnected) {
-  path = path || 'http://localhost:8124';
+  path = `http://${path || 'localhost'}:8124`;
+  console.log(`Try connect to ${path}`);
   const io = require('socket.io-client');
   const client = io(path, {
     reconnection: false,
