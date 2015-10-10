@@ -4,7 +4,7 @@ const _ = require('lodash');
 const uuid = require('node-uuid');
 const Clipboard = require('./Clipboard');
 
-function startWebSocketServer() {
+function startWebSocketServer(callback) {
   const clients = {};
   const app = require('http').createServer((req, res) => {
     res.send('Hello from clipboard server');
@@ -28,27 +28,29 @@ function startWebSocketServer() {
 
   app.listen(8124, '0.0.0.0', () => {
     console.log(`Server was started on 0.0.0.0:8124`);
+    callback();
   });
 
   return {
     send: (data) => {
       _.forOwn(clients, client => client.emit(data));
     },
-    close: (callback) => {
+    close: () => {
       console.log('Stopping server');
-      app.close(callback);
+      io.close();
+      app.close();
     }
   }
 }
 
-function initClipboardServer() {
-  const connection = startWebSocketServer();
+function initClipboardServer(callback) {
+  const connection = startWebSocketServer(callback);
   const stopListening = Clipboard.listenChanges(data => connection.send(data));
 
   return {
-    close: (callback) => {
+    close: () => {
       stopListening();
-      connection.close(callback);
+      connection.close();
     }
   };
 }
