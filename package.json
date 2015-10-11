@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build-js;electron .",
-    "build-js": "browserify --no-bundle-external main.jsx -o bundle.js",
-    "watch-js": "watchify --no-bundle-external main.jsx -o bundle.js -v"
+    "build-js": "browserify --no-bundle-external browser/main.jsx -o bundle.js",
+    "watch-js": "watchify --no-bundle-external browser/main.jsx -o bundle.js -v"
   },
   "repository": "https://github.com/blan4/ClipBoard",
   "author": "Ilya Siganov <ilya.blan4@gmail.com>",
