@@ -33,7 +33,7 @@ function startWebSocketServer(callback) {
 
   return {
     send: (data) => {
-      _.forOwn(clients, client => client.emit(data));
+      _.forOwn(clients, client => client.send(data));
     },
     close: () => {
       console.log('Stopping server');

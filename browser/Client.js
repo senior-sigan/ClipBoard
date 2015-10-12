@@ -30,7 +30,7 @@ function connectToWebSocketServer(path, callback, disconnected) {
   });
 
   return {
-    send: (data) => client.emit(data),
+    send: (data) => client.send(data),
     close: () => client.disconnect()
   };
 }
