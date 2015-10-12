@@ -13,6 +13,7 @@
   "author": "Ilya Siganov <ilya.blan4@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "history": "^1.12.5",
     "lodash": "^3.10.1",
     "material-design-lite": "^1.0.5",
     "node-uuid": "^1.4.3",
