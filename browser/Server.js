@@ -7,7 +7,8 @@ const Clipboard = require('./Clipboard');
 function startWebSocketServer(callback) {
   const clients = {};
   const app = require('http').createServer((req, res) => {
-    res.send('Hello from clipboard server');
+    res.writeHead(200);
+    res.end('Hello from Clipboard server');
   });
   const io = require('socket.io')(app);
   io.on('connection', client => {
