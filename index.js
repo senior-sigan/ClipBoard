@@ -10,6 +10,7 @@ const path = require('path');
 // Report crashes to our server.
 require('crash-reporter').start();
 
+let realyQuit = false;
 const icon = path.join(__dirname, 'icon.png');
 const menuTemplate = [{
   label: 'Clipboard',
@@ -19,7 +20,10 @@ const menuTemplate = [{
   click: hideWindow
 }, {
   label: 'Exit',
-  click: app.quit
+  click: () => {
+    realyQuit = true;
+    app.quit();
+  }
 }];
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -74,6 +78,9 @@ function createWindow() {
   });
   //mainWindow.on('blur', hideWindow);
   mainWindow.on('close', function (e) {
+    if (realyQuit) {
+      return;
+    }
     e.preventDefault();
     hideWindow();
   });
