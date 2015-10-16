@@ -46,13 +46,14 @@ const ClientComponent = React.createClass({
   render: function() {
     return (
       <div>
-      <h2>{(() => {
+      <h4>{(() => {
           if (this.state.connected) {
             return 'Connected to server'
           } else {
             return 'Connecting.......'
           }
-        })()}</h2>
+        })()}
+      </h4>
         <button onClick={this.handleDisconnect} className="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
           Disconnect
         </button>

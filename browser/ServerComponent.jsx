@@ -30,14 +30,14 @@ const ServerComponent = React.createClass({
     const addresses = LocalAddress();
     return (
       <div>
-        <h2>{(() => {
+        <h4>{(() => {
             if (this.state.server) {
               return 'Server is running'
             } else {
               return 'Connecting to server'
             }
           })()}
-        </h2>
+        </h4>
         <ul>
           {addresses.map(address => {
             return <li key="{address}">{address}</li>

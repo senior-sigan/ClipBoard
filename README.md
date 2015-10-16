@@ -17,7 +17,7 @@ For autobuilding react components and browserification run `npm run watch-js`
 - [x] use simple client-server communication
 - [x] copy here -> in clipboard there
 - [x] put text data in clipboard
-- [ ] in tray application
+- [x] in tray application
 - [ ] encipher clipboard content with AES256
 - [ ] use masterPassword with PBKDF2
 - [ ] setup linux, osx, windows builds
