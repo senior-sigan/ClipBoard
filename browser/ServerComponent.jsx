@@ -5,6 +5,7 @@ const ReactDOM = require('react-dom');
 const ReactRouter = require('react-router');
 const History = ReactRouter.History;
 const Server = require('./Server');
+const LocalAddress = require('./LocalAddress');
 
 const ServerComponent = React.createClass({
   mixins: [History],
@@ -26,6 +27,7 @@ const ServerComponent = React.createClass({
   },
 
   render: function() {
+    const addresses = LocalAddress();
     return (
       <div>
         <h2>{(() => {
@@ -34,7 +36,13 @@ const ServerComponent = React.createClass({
             } else {
               return 'Connecting to server'
             }
-          })()}</h2>
+          })()}
+        </h2>
+        <ul>
+          {addresses.map(address => {
+            return <li key="{address}">{address}</li>
+          })}
+        </ul>
         <button onClick={this.handleDisconnect} className="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
           Disconnect
         </button>
