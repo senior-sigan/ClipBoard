@@ -32,7 +32,9 @@ let mainWindow = null;
 let tray = null;
 let menu = new Menu.buildFromTemplate(menuTemplate);
 
-app.dock.hide();
+if (app.dock && app.dock.hide) {
+  app.dock.hide();
+}
 
 app.on('window-all-closed', function() {
   console.log('All windows closed');
