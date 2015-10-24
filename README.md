@@ -1,5 +1,5 @@
 # ClipBoard _alpha_
-Just clipboard sharing between computers. No internet needs. On the top of security. Cross platform.
+Just clipboard sharing between computers. Doesn't need internet. On the top of security. Cross platform.
 
 ## WARNING. Work still in progress.
 
