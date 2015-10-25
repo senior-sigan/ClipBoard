@@ -17,7 +17,7 @@ function startWebSocketServer(callback) {
     clients[clientId] = client;
 
     client.on('message', data => {
-      console.log(`[Server] Received from remote: ${data}`);
+      console.log(`[Server] Received from remote`, data);
       Clipboard.putInClip(data);
     });
 

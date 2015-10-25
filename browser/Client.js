@@ -21,7 +21,7 @@ function connectToWebSocketServer(path, callback, disconnected) {
     disconnected(e === 'transport close');
   });
   client.on('message', data => {
-    console.log(`[Client] Received from remote: ${data}`);
+    console.log(`[Client] Received from remote`, data);
     Clipboard.putInClip(data);
   });
   client.on('connect_error', (e) => {
