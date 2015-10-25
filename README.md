@@ -10,6 +10,7 @@ You can download latest build [here](https://github.com/blan4/ClipBoard/releases
 To start program in development mode you can run this in the project root.
 
 ```
+npm install -g electron-prebuilt
 npm install
 npm start
 ```
