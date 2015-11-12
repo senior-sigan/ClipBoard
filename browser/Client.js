@@ -1,6 +1,7 @@
 'use strict';
 
 const Clipboard = require('./Clipboard');
+const DataWrapper = require('./DataWrapper');
 const os = require('os');
 
 function connectToWebSocketServer(path, callback, disconnected) {
@@ -23,7 +24,7 @@ function connectToWebSocketServer(path, callback, disconnected) {
   });
   client.on('message', data => {
     console.log(`[Client] Received from remote: ${JSON.stringify(data, null ,' ')}`);
-    Clipboard.putInClip(data.data);
+    Clipboard.putInClip(DataWrapper.unwrap(data));
   });
   client.on('connect_error', (e) => {
     console.log(JSON.stringify(e));
@@ -38,7 +39,7 @@ function connectToWebSocketServer(path, callback, disconnected) {
 
 function initClipboardClient(path, callback, disconnected) {
   const connection = connectToWebSocketServer(path, callback, disconnected);
-  const stopListening = Clipboard.listenChanges(data => connection.send({data: data, from: os.hostname()}));
+  const stopListening = Clipboard.listenChanges(data => connection.send(DataWrapper.wrap(data)));
 
   return {
     close: () => {
