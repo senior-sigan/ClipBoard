@@ -3,6 +3,7 @@
 const _ = require('lodash');
 const uuid = require('node-uuid');
 const Clipboard = require('./Clipboard');
+const os = require('os');
 
 function startWebSocketServer(callback) {
   const clients = {};
@@ -17,8 +18,8 @@ function startWebSocketServer(callback) {
     clients[clientId] = client;
 
     client.on('message', data => {
-      console.log(`[Server] Received from remote: ${data}`);
-      Clipboard.putInClip(data);
+      console.log(`[Server] Received from remote: ${JSON.stringify(data, null ,' ')}`);
+      Clipboard.putInClip(data.data);
     });
 
     client.on('disconnect', () => {
@@ -46,7 +47,7 @@ function startWebSocketServer(callback) {
 
 function initClipboardServer(callback) {
   const connection = startWebSocketServer(callback);
-  const stopListening = Clipboard.listenChanges(data => connection.send(data));
+  const stopListening = Clipboard.listenChanges(data => connection.send({data: data, from: os.hostname()}));
 
   return {
     close: () => {
