@@ -24,7 +24,7 @@ function connectToWebSocketServer(path, callback, disconnected) {
   });
   client.on('message', data => {
     console.log(`[Client] Received from remote: ${JSON.stringify(data, null ,' ')}`);
-    Clipboard.putInClip(DataWrapper.unwrap(data));
+    Clipboard.putInClip(data);
   });
   client.on('connect_error', (e) => {
     console.log(JSON.stringify(e));

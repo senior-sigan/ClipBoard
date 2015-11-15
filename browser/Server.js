@@ -20,7 +20,7 @@ function startWebSocketServer(callback) {
 
     client.on('message', data => {
       console.log(`[Server] Received from remote: ${JSON.stringify(data, null ,' ')}`);
-      Clipboard.putInClip(DataWrapper.unwrap(data));
+      Clipboard.putInClip(data);
     });
 
     client.on('disconnect', () => {
