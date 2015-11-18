@@ -20,7 +20,7 @@ function connectToWebSocketServer(path, callback, disconnected) {
   });
   client.on('disconnect', (e) => {
     console.log(`Disconnected from Clipboard server ${path} ${e}`)
-    disconnected(e === 'transport close');
+    disconnected(e !== 'io client disconnect');
   });
   client.on('message', data => {
     console.log(`[Client] Received from remote: ${JSON.stringify(data, null ,' ')}`);

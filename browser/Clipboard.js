@@ -8,6 +8,9 @@ const history = [];
 function pushToHistory(text, source) {
   source = source || os.hostname();
   history.push({data: text, source: source});
+  if (history.length > 10) {
+    history.shift();
+  }
 }
 
 function readClip() {
