@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build-js;electron app",
+    "start": "npm run build-js;electron app --dev",
     "build-js": "browserify --no-bundle-external app/browser/main.jsx -o app/bundle.js",
     "build-fat-js": "browserify --bare --im app/browser/main.jsx -o app/bundle.js",
     "watch-js": "watchify --no-bundle-external app/browser/main.jsx -o app/bundle.js -v",

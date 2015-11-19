@@ -1,10 +1,12 @@
 'use strict';
 
-const app = require('app');  // Module to control application life.
+const electron = require('electron');
+const app = electron.app;  // Module to control application life.
 const BrowserWindow = require('browser-window');  // Module to create native browser window.
-const ipc = require('ipc');
+const ipc = electron.ipcMain;
 const Menu = require('menu');
 const Tray = require('tray');
+
 const path = require('path');
 
 // Report crashes to our server.
@@ -88,8 +90,10 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-  // Open the DevTools.
-  mainWindow.openDevTools({detach: true});
+  if (process.argv[process.argv.length - 1] == '--dev') {
+    // Open the DevTools.
+    mainWindow.openDevTools({detach: true});
+  }
 }
