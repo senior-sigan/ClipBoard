@@ -1,0 +1,29 @@
+{
+  "name": "shared_clipboard",
+  "version": "1.0.0",
+  "description": "Just clipboard sharing between computers. Doesn't need internet. On the top of security. Cross platform.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm electron ."
+  },
+  "repository": "https://github.com/blan4/ClipBoard",
+  "author": "Ilya Siganov <ilya.blan4@gmail.com>",
+  "license": "MIT",
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  },
+  "dependencies": {
+    "history": "^1.13.1",
+    "lodash": "^3.10.1",
+    "material-design-lite": "^1.0.6",
+    "node-uuid": "^1.4.3",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-router": "^1.0.0",
+    "socket.io": "^1.3.7",
+    "socket.io-client": "^1.3.7"
+  }
+}
