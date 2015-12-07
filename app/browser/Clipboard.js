@@ -41,7 +41,7 @@ function listenChanges(callback) {
       console.log(history);
       callback(data);
     }
-  }, 500);
+  }, 100);
 
   return () => {
     clearInterval(intervalId);
