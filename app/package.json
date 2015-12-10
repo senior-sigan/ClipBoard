@@ -16,7 +16,7 @@
     ]
   },
   "dependencies": {
-    "history": "^1.13.1",
+    "history": "^1.15.0",
     "lodash": "^3.10.1",
     "material-design-lite": "^1.0.6",
     "node-uuid": "^1.4.3",
